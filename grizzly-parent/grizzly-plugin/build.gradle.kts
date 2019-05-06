@@ -21,6 +21,9 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
+    compile("org.springframework.boot:spring-boot-gradle-plugin:2.1.4.RELEASE")
+    compile("io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE")
+
     testImplementation("org.assertj:assertj-core:3.9.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.1.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.1.0")

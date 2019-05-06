@@ -47,16 +47,8 @@ open class GrizzlyPlugin: Plugin<Project> {
                 override fun afterResolve(dependencies: ResolvableDependencies) {}
             })
 
-            tasks.create("grizzlyTask") { task ->
-                task.doLast {
-                    configurations
-                            .getByName("default")
-                            .dependencies
-                            .add(dependencies.create("org.springframework:spring-core"))
-
-                    println("myConfig=${configurations.getByName("default").files}")
-                }
-            }
+            pluginManager.apply("org.springframework.boot")
+            pluginManager.apply("io.spring.dependency-management")
         }
     }
 }
