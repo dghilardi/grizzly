@@ -3,8 +3,10 @@ package org.d71.grizzly.plugin.dependencymng
 import org.d71.grizzly.plugin.model.GrizzlyFeature
 
 class GrizzlySpring {
-    fun dependencyList(features: Set<GrizzlyFeature>) = listOf(
+    val GRAPHQL_SPRING_BOOT_VERSION = "5.7.3"
+    val GRAPHQL_JAVA_TOOL_VERSION = "5.5.2"
 
+    fun dependencyList(features: Set<GrizzlyFeature>) = listOf(
             // core
             listOf(
                     "org.springframework.boot:spring-boot-starter-logging",
@@ -43,6 +45,17 @@ class GrizzlySpring {
                         "org.springframework.cloud:spring-cloud-gcp-starter-trace",
                         "org.springframework.cloud:spring-cloud-gcp-starter-logging",
                         "org.springframework.cloud:spring-cloud-gcp-starter-storage"
+                )
+            else
+                listOf(),
+
+            // graphql
+            if (features.contains(GrizzlyFeature.GRAPHQL))
+                listOf(
+                        "com.graphql-java-kickstart:graphql-spring-boot-starter:$GRAPHQL_SPRING_BOOT_VERSION",
+                        "com.graphql-java-kickstart:graphiql-spring-boot-starter:jar:$GRAPHQL_SPRING_BOOT_VERSION",
+                        "com.graphql-java-kickstart:voyager-spring-boot-starter:jar:$GRAPHQL_SPRING_BOOT_VERSION",
+                        "com.graphql-java-kickstart:graphql-java-tools:jar:$GRAPHQL_JAVA_TOOL_VERSION"
                 )
             else
                 listOf()
