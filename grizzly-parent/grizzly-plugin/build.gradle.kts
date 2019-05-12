@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version ("1.2.30")
     id("java-gradle-plugin")
     id("maven-publish")
+    id("com.gradle.plugin-publish") version "0.10.0"
 }
 
 
@@ -38,9 +39,17 @@ gradlePlugin {
     plugins {
         create("grizzly") {
             id = "org.d71.grizzly"
+            displayName = "Grizzly Plugin"
+            description = "Gradle modular dependency manager"
             implementationClass = "org.d71.grizzly.plugin.GrizzlyPlugin"
         }
     }
+}
+
+pluginBundle {
+    website = "https://github.com/dghilardi/grizzly"
+    vcsUrl = "https://github.com/dghilardi/grizzly.git"
+    tags = listOf("dependency-manager", "web", "java", "kotlin")
 }
 
 publishing {
