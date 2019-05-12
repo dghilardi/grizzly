@@ -8,6 +8,11 @@ group = 'org.d71'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+grizzlyPlugin {
+    flavour = 'spring'
+    features = ['WEB']
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor

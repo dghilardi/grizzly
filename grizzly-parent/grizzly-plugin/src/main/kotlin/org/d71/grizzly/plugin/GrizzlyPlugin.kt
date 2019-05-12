@@ -6,48 +6,31 @@ import org.gradle.api.Plugin
 import org.gradle.api.artifacts.DependencyResolutionListener
 import org.gradle.api.artifacts.ResolvableDependencies
 import io.spring.gradle.dependencymanagement.dsl.ImportsHandler
-import com.sun.javafx.scene.CameraHelper.project
 import io.spring.gradle.dependencymanagement.DependencyManagementPlugin
+import org.d71.grizzly.plugin.dependencymng.GrizzlySpring
+import org.d71.grizzly.plugin.model.GrizzlyFeature
+import org.d71.grizzly.plugin.model.GrizzlyFlavour
 import org.gradle.api.Action
 
-
-open class MyExt(
-        val toolVersion: String = "xxx"
+open class GrizzlyExt(
+        var flavour: GrizzlyFlavour = GrizzlyFlavour.SPRING,
+        var features: Array<GrizzlyFeature> = arrayOf()
 )
 
 open class GrizzlyPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            val myExt = extensions.create("grizzlyPlugin", MyExt::class.java)
+            val grizzlyExt = extensions.create("grizzlyPlugin", GrizzlyExt::class.java)
             val compileDeps = project.configurations.getByName("compile").dependencies
 
             gradle.addListener(object : DependencyResolutionListener {
                 override fun beforeResolve(dependencies: ResolvableDependencies) {
-                    // core
-                    compileDeps.add(project.dependencies.create("org.springframework.boot:spring-boot-starter-logging"))
-                    compileDeps.add(project.dependencies.create("org.springframework.boot:spring-boot-starter-actuator"))
-                    compileDeps.add(project.dependencies.create("org.springframework.boot:spring-boot-devtools"))
-                    compileDeps.add(project.dependencies.create("commons-io:commons-io"))
-                    compileDeps.add(project.dependencies.create("org.springframework.cloud:spring-cloud-starter-openfeign"))
+                    println("config: '${grizzlyExt.flavour}' - ${grizzlyExt.features.asList()}")
 
-                    // web
-                    compileDeps.add(project.dependencies.create("org.springframework.boot:spring-boot-starter-web"))
-                    compileDeps.add(project.dependencies.create("io.swagger.core.v3:swagger-annotations:2.0.8"))
+                    val deps = GrizzlySpring().dependencyList(grizzlyExt.features.toSet())
 
-                    // cache
-                    // compileDeps.add(project.dependencies.create("org.springframework.boot:spring-boot-starter-cache"))
-                    // compileDeps.add(project.dependencies.create("org.ehcache:ehcache"))
-                    // compileDeps.add(project.dependencies.create("javax.cache:cache-api"))
-                    // compileDeps.add(project.dependencies.create("org.terracotta:management-model:2.3.0"))
+                    deps.forEach { compileDeps.add(project.dependencies.create(it)) }
 
-                    // gcp
-                    // compileDeps.add(project.dependencies.create("org.springframework.cloud:spring-cloud-starter-kubernetes-config"))
-                    // compileDeps.add(project.dependencies.create("org.springframework.cloud:spring-cloud-gcp-starter"))
-                    // compileDeps.add(project.dependencies.create("org.springframework.cloud:spring-cloud-gcp-starter-trace"))
-                    // compileDeps.add(project.dependencies.create("org.springframework.cloud:spring-cloud-gcp-starter-logging"))
-                    // compileDeps.add(project.dependencies.create("org.springframework.cloud:spring-cloud-gcp-starter-storage"))
-
-                    println("myConfig=${compileDeps}")
                     gradle.removeListener(this)
                 }
 
