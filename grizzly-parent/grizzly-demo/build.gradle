@@ -1,7 +1,7 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.21'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.3.21'
-    id 'org.d71.grizzly' version '0.1.0-SNAPSHOT'
+    id 'org.d71.grizzly' version '0.1.1'
 }
 
 group = 'org.d71'

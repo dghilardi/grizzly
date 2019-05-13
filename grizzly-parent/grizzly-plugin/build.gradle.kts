@@ -33,7 +33,7 @@ dependencies {
 (tasks.findByName("test") as Test).useJUnitPlatform()
 
 group = "org.d71"
-version = "0.1.0-SNAPSHOT"
+version = "0.1.1"
 
 gradlePlugin {
     plugins {
