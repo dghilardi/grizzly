@@ -53,9 +53,9 @@ class GrizzlySpring {
             if (features.contains(GrizzlyFeature.GRAPHQL))
                 listOf(
                         "com.graphql-java-kickstart:graphql-spring-boot-starter:$GRAPHQL_SPRING_BOOT_VERSION",
-                        "com.graphql-java-kickstart:graphiql-spring-boot-starter:jar:$GRAPHQL_SPRING_BOOT_VERSION",
-                        "com.graphql-java-kickstart:voyager-spring-boot-starter:jar:$GRAPHQL_SPRING_BOOT_VERSION",
-                        "com.graphql-java-kickstart:graphql-java-tools:jar:$GRAPHQL_JAVA_TOOL_VERSION"
+                        "com.graphql-java-kickstart:graphiql-spring-boot-starter:$GRAPHQL_SPRING_BOOT_VERSION",
+                        "com.graphql-java-kickstart:voyager-spring-boot-starter:$GRAPHQL_SPRING_BOOT_VERSION",
+                        "com.graphql-java-kickstart:graphql-java-tools:$GRAPHQL_JAVA_TOOL_VERSION"
                 )
             else
                 listOf()
